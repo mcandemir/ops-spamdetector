@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spam Detector</title>
+</head>
+<body>
+
+<div class="input-form">
+    <h3>Enter the mail</h3>
+    <form method="post">
+        <input name="mail">
+        <input type="submit">
+    </form>
+</div>
+
+<div class="input-info">
+    {% if mail %}
+        <p>{{ mail }}</p>
+    {% else %}
+        <p>please enter a sample</p>
+    {% endif %}
+</div>
+
+
+</body>
+</html>

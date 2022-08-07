@@ -1,10 +1,22 @@
-name: Web API Dockerize
-on: [push]
+name: Web API Dockerize Publish
+on:
+  push:
+    branches:
+      - 'main'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Build the Docker image
-        run: docker build -t spamdetector-webapi WebAPI/
+      - name: Docker Login
+        env:
+          DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+          DOCKER_TOKEN: ${{secrets.DOCKER_TOKEN}}
+        run: |
+          docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN
+      - name: Docker Image Build
+        run: docker build -t mcandemir/spamdetector-webapi:$(date +%s) WebAPI/
+      - name: Docker Repo and Tags
+      - name: Docker Push
+        run: docker push ${{secrets.DOCKER_USERNAME}}/ops-spamdetector:spamdetector-webapi WebAPI/

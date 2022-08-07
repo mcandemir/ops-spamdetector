@@ -17,6 +17,5 @@ jobs:
           docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN
       - name: Docker Image Build
         run: docker build -t mcandemir/spamdetector-webapi:$(date +%s) WebAPI/
-      - name: Docker Repo and Tags
       - name: Docker Push
         run: docker push ${{secrets.DOCKER_USERNAME}}/ops-spamdetector:spamdetector-webapi WebAPI/

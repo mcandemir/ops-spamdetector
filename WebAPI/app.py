@@ -13,7 +13,7 @@ def index():
 @app.route('/', methods=['POST'])
 def index_post():
     mail = request.form['mail']
-    r = requests.post("http://172.17.0.3:5001/detect", data=mail)
+    r = requests.post("http://localhost:5001/detect", data=mail)
     return render_template('index.html', mail=r.text)
 
 
@@ -26,6 +26,5 @@ def index_post():
 if __name__ == '__main__':
     app.run(
         debug=True,
-        host='0.0.0.0',
         port=5000
     )

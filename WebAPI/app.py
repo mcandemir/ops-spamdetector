@@ -13,7 +13,7 @@ def index():
 @app.route('/', methods=['POST'])
 def index_post():
     mail = request.form['mail']
-    r = requests.post("http://spamdetector-modelapi-service:8080/detect", data=mail)
+    r = requests.post("http://spamdetector-modelapi-service:5001/detect", data=mail)
     return render_template('index.html', mail=r.text)
 
 

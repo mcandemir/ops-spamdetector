@@ -17,12 +17,6 @@ def index_post():
     return render_template('index.html', mail=r.text)
 
 
-# @app.route('/', methods=['GET'])
-# def index_get():
-#     prediction = requests.get("http://172.17.0.3:5001")
-#     return render_template('index.html', prediction=prediction)
-
-
 if __name__ == '__main__':
     app.run(
         debug=True,

@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
-FROM python:3.8
+FROM tensorflow/tensorflow:latest
 
-WORKDIR ModelAPI-docker
+WORKDIR /ModelAPI-docker
 
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt

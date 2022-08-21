@@ -1,4 +1,6 @@
 ## Ops-SpamDetection
+### Abstraction of the cluster:
+![img](img/workflow.png)
 
 ### How to run?
 

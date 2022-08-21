@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spamdetector-webapi-depl
+  labels:
+    app: spamdetector-webapi
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spamdetector-webapi
+  template:
+    metadata:
+      labels:
+        app: spamdetector-webapi
+    spec:
+      containers:
+        - name: spamdetector-webapi
+          image: mcandemir/spamdetector-webapi:v1.0.0
+          ports:
+            - containerPort: 5000
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spamdetector-modelapi-depl
+  labels:
+    app: spamdetector-modelapi
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spamdetector-modelapi
+  template:
+    metadata:
+      labels:
+        app: spamdetector-modelapi
+    spec:
+      containers:
+        - name: spamdetector-modelapi
+          image: mcandemir/spamdetector-modelapi:v1.0.0
+          ports:
+            - containerPort: 5001
+

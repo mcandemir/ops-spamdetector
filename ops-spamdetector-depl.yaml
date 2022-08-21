@@ -17,6 +17,7 @@ spec:
     spec:
       containers:
         - name: spamdetector-webapi
+          imagePullPolicy: Always
           image: mcandemir/spamdetector-webapi:v1.0.0
           ports:
             - containerPort: 5000
@@ -42,7 +43,7 @@ spec:
     spec:
       containers:
         - name: spamdetector-modelapi
+          imagePullPolicy: Always
           image: mcandemir/spamdetector-modelapi:v1.0.0
           ports:
             - containerPort: 5001
-

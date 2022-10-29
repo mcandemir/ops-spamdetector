@@ -22,8 +22,12 @@ spec:
           ports:
             - containerPort: 5000
         - env:
-            name: MODELAPI_SERVICE
+          - name: MODELAPI_SERVICE
             value: http://spamdetector-modelapi-service:5001/detect
+          - name: WEBAPI_PORT
+            value: 5000
+          - name: WEBAPI_HOST
+            value: 0.0.0.0
 
 ---
 

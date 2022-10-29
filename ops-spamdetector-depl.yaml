@@ -21,6 +21,13 @@ spec:
           image: mcandemir/spamdetector-webapi:v1.0.0
           ports:
             - containerPort: 5000
+          env:
+          - name: MODELAPI_SERVICE
+            value: http://spamdetector-modelapi-service:5001/detect
+          - name: WEBAPI_PORT
+            value: "5000"
+          - name: WEBAPI_HOST
+            value: 0.0.0.0
 
 ---
 
@@ -47,3 +54,10 @@ spec:
           image: mcandemir/spamdetector-modelapi:v1.0.0
           ports:
             - containerPort: 5001
+          env:
+            - name: MODELAPI_ROUTE
+              value: /detect
+            - name: MODELAPI_PORT
+              value: "5001"
+            - name: MODEL_HOST
+              value: 0.0.0.0

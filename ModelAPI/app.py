@@ -1,3 +1,4 @@
+import os
 import numpy as np
 from flask import Flask, request
 import tensorflow as tf
@@ -6,6 +7,9 @@ from keras.preprocessing.text import Tokenizer
 from keras.utils import pad_sequences
 
 app = Flask(__name__)
+modelapi_route = os.environ['MODELAPI_ROUTE']
+modelapi_port = os.environ['MODELAPI_PORT']
+modelapi_host = os.environ['MODELAPI_HOST']
 model = tf.keras.models.load_model('spamdetector.h5')
 
 with open('tokenizer.pickle', 'rb') as handle:
@@ -30,6 +34,6 @@ def detect():
 if __name__ == '__main__':
     app.run(
         debug=True,
-        port=5001,
-        host='0.0.0.0'
+        port=int(modelapi_port),
+        host=modelapi_host
     )

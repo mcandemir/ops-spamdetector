@@ -1,4 +1,6 @@
 import os
+from dotenv import load_dotenv
+load_dotenv()  # for local work
 import numpy as np
 from flask import Flask, request
 import tensorflow as tf

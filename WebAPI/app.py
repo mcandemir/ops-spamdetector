@@ -1,4 +1,6 @@
 import os
+from dotenv import load_dotenv
+load_dotenv()  # for local work
 import requests
 from flask import Flask, render_template, request
 

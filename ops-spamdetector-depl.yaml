@@ -24,7 +24,6 @@ spec:
         - env:
             name: MODELAPI_SERVICE
             value: http://spamdetector-modelapi-service:5001/detect
-          args: [$(MODELAPI_SERVICE)]
 
 ---
 

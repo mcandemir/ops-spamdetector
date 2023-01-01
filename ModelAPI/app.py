@@ -4,18 +4,13 @@ from dotenv import load_dotenv
 from flask import Flask, request
 
 load_dotenv()  # for local work
-import joblib
-import numpy as np
-import pandas as pd
 import requests
-from sklearn.pipeline import Pipeline
 
 app = Flask(__name__)
 modelapi_route = os.environ['MODELAPI_ROUTE']
 modelapi_port = os.environ['MODELAPI_PORT']
 modelapi_host = os.environ['MODELAPI_HOST']
 seldon_endpoint = os.environ['SELDON_ENDPOINT']
-
 
 
 @app.route("/detect", methods=['POST'])
@@ -46,12 +41,6 @@ def detect():
     response = requests.post(seldon_endpoint, json=inference_request)
     json = response.json()
     return json['outputs'][0]['data']
-
-    # return results
-    # if p[0][0] > 0.2:
-    #     return "mail is a spam"
-    # else:
-    #     return "mail is not a spam"
 
 
 if __name__ == '__main__':

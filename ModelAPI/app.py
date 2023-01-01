@@ -22,6 +22,10 @@ def detect():
     # get prediction
     text1 = ['Hello, we have finally met. You have earned $3000 dollars. You have 1 hour to claim your prize. Start now!']
     text2 = ['Hello James, how are you? Can you please set a meeting at 9 pm? Thank you.']
+    
+
+
+    {"data":{"names":["text"],"tensor":{"shape":[1],"values":[decoded_text]}}}
 
     inference_request = {
         "parameters": {

@@ -1,0 +1,7 @@
+pandas
+numpy
+matplotlib
+sklearn=0.24.2
+joblib
+mlserver-sklearn
+jupyterlab

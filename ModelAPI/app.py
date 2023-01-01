@@ -1,36 +1,57 @@
 import os
+
 from dotenv import load_dotenv
-load_dotenv()  # for local work
-import numpy as np
 from flask import Flask, request
-import tensorflow as tf
-import pickle
-from keras.preprocessing.text import Tokenizer
-from keras.utils import pad_sequences
+
+load_dotenv()  # for local work
+import joblib
+import numpy as np
+import pandas as pd
+import requests
+from sklearn.pipeline import Pipeline
 
 app = Flask(__name__)
 modelapi_route = os.environ['MODELAPI_ROUTE']
 modelapi_port = os.environ['MODELAPI_PORT']
 modelapi_host = os.environ['MODELAPI_HOST']
-model = tf.keras.models.load_model('spamdetector.h5')
+seldon_endpoint = os.environ['SELDON_ENDPOINT']
 
-with open('tokenizer.pickle', 'rb') as handle:
-    tokenizer = pickle.load(handle)
 
 
 @app.route("/detect", methods=['POST'])
 def detect():
-    mail = request.data
-    decoded_mail = [bytes.decode(mail)]
+    # decode data
+    text = request.data
+    decoded_text = [bytes.decode(text)]
 
-    tokenized_text = tokenizer.texts_to_sequences(decoded_mail)
-    pad_text = pad_sequences(tokenized_text, maxlen=162)
-    p = model.predict(pad_text)
+    # get prediction
+    text1 = ['Hello, we have finally met. You have earned $3000 dollars. You have 1 hour to claim your prize. Start now!']
+    text2 = ['Hello James, how are you? Can you please set a meeting at 9 pm? Thank you.']
 
-    if p[0][0] > 0.2:
-        return "mail is a spam"
-    else:
-        return "mail is not a spam"
+    inference_request = {
+        "parameters": {
+            "content_type": "str"
+        },
+        "inputs": [
+            {
+            "name": "decoded_text",
+            "data": decoded_text,
+            "datatype": "BYTES",
+            "shape": [1],
+            },
+        ]
+    }
+    
+    # endpoint = "http://localhost:8080/v2/models/model/versions/v1.2.0/infer"
+    response = requests.post(seldon_endpoint, json=inference_request)
+    json = response.json()
+    return json['outputs'][0]['data']
+
+    # return results
+    # if p[0][0] > 0.2:
+    #     return "mail is a spam"
+    # else:
+    #     return "mail is not a spam"
 
 
 if __name__ == '__main__':

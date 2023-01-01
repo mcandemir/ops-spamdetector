@@ -25,7 +25,7 @@ def detect():
     
 
 
-    request = {"data":{"names":["text"],"tensor":{"shape":[1],"values":[decoded_text]}}}
+    microservice_request = {"data":{"names":["text"],"tensor":{"shape":[1],"values":[decoded_text]}}}
 
     inference_request = {
         "parameters": {
@@ -42,7 +42,7 @@ def detect():
     }
     
     # endpoint = "http://localhost:8080/v2/models/model/versions/v1.2.0/infer"
-    response = requests.post(seldon_endpoint, json=request)
+    response = requests.post(seldon_endpoint, json=microservice_request)
     json = response.json()
     return json
 

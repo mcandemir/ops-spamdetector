@@ -1,9 +1,10 @@
 import os
+
 from dotenv import load_dotenv
+
 load_dotenv()  # for local work
 import requests
 from flask import Flask, render_template, request
-
 
 app = Flask(__name__)
 modelapi_service = os.environ['MODELAPI_SERVICE']

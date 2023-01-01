@@ -40,7 +40,7 @@ def detect():
     # endpoint = "http://localhost:8080/v2/models/model/versions/v1.2.0/infer"
     response = requests.post(seldon_endpoint, json=inference_request)
     json = response.json()
-    return json['outputs'][0]['data']
+    return json
 
 
 if __name__ == '__main__':
